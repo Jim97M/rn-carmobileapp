@@ -78,7 +78,7 @@ const RegisterScreen = (props) => {
     .then((response) => response.json())
     .then((responseJson) => {
       setLoading(false);
-      let responseJson = response.json();
+      
       if(responseJson.status == 'success'){
         setRegistrationSuccess(true);
         console.log("Registred Successfully");
@@ -123,14 +123,113 @@ const RegisterScreen = (props) => {
   }
 
    return(
-     <View>
+     <View style={{flex: 1, backgroundColor: '#307ecc'}}>
        <Loader loading={loading} />
-       <ScrollView>
-         <View>
-           
+       <ScrollView
+         keyboardShouldPersistTaps="handled"
+         contentContainerStyle={{
+           justifyContent: 'center',
+           alignContent: 'center'
+         }}>
+         <View style={{alignItems: 'center'}}>
+           <Image 
+             source={require('../images/success.png')}
+             style={{
+               width: '50%',
+               height: 100,
+               resizeMode: 'contain',
+               margin: 30
+             }}
+           />
          </View>
+         <KeyboardAvoidingView enabled>
+           <View>
+            <TextInput 
+              ref={userInputRef}
+              onChangeText={(userName) => setuserName(userName)}
+              placeholder="Enter Name"
+              underlineColorAndroid="#f000"
+              autoCapitalize="sentences"
+              returnKeyType="next"
+              onSubmitEditing={() => 
+                userInputRef.current && userInputRef.current.focus()
+              }
+                blurOnSubmit={false}
+             />
+           </View>
+           <View>
+            <TextInput 
+              ref={emailInputRef}
+              onChangeText={(email) => setEmail(email)}
+              placeholder="Enter Email"
+              underlineColorAndroid="#f000"
+              autoCapitalize="sentences"
+              returnKeyType="next"
+              onSubmitEditing={() => 
+                emailInputRef.current && emailInputRef.current.focus()
+              }
+                blurOnSubmit={false}
+             />
+           </View>
+           <View>
+            <TextInput 
+              ref={phoneInputRef}
+              onChangeText={(phone) => setPhone(phone)}
+              placeholder="Enter Phone"
+              underlineColorAndroid="#f000"
+              autoCapitalize="sentences"
+              returnKeyType="next"
+              onSubmitEditing={() => 
+                phoneInputRef.current && phoneInputRef.current.focus()
+              }
+                blurOnSubmit={false}
+             />
+           </View>
+           <View>
+            <TextInput 
+              ref={passwordInputRef}
+              onChangeText={(password) => setPassword(password)}
+              placeholder="Enter Password"
+              underlineColorAndroid="#f000"
+              autoCapitalize="sentences"
+              returnKeyType="next"
+              onSubmitEditing={() => 
+                passwordInputRef.current && passwordInputRef.current.focus()
+              }
+                blurOnSubmit={false}
+             />
+           </View>
+           <View>
+            <TextInput 
+              ref={emailInputRef}
+              onChangeText={(userName) => setuserName(userName)}
+              placeholder="Enter Name"
+              underlineColorAndroid="#f000"
+              autoCapitalize="sentences"
+              returnKeyType="next"
+              onSubmitEditing={() => 
+                emailInputRef.current && emailInputRef.current.focus()
+              }
+                blurOnSubmit={false}
+             />
+           </View>
+           {errorText != null ?(
+             <Text>
+               {errorText}
+             </Text>
+           ) : null
+            
+           }
+           <TouchableOpacity 
+            onPress={handleSubmit}
+           >
+             <Text>Register</Text>
+           </TouchableOpacity>
+         </KeyboardAvoidingView>
        </ScrollView>
      </View>
-   )
+   ); 
 
 }
+
+export default RegistrationScreen;
