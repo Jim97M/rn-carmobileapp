@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView } from "react-native"
 import { ScrollView } from 'react-native-gesture-handler';
 
-  import Loader from './Loader';
+  import Loader from './components/Loader';
 const RegisterScreen = (props) => {
   const [userName, setuserName] = useState('');
   const [email, setEmail] = useState('');
@@ -199,20 +199,14 @@ const RegisterScreen = (props) => {
                 blurOnSubmit={false}
              />
            </View>
+           
            <View>
-            <TextInput 
-              ref={emailInputRef}
-              onChangeText={(userName) => setuserName(userName)}
-              placeholder="Enter Name"
-              underlineColorAndroid="#f000"
-              autoCapitalize="sentences"
-              returnKeyType="next"
-              onSubmitEditing={() => 
-                emailInputRef.current && emailInputRef.current.focus()
-              }
-                blurOnSubmit={false}
-             />
+            <ImageData
+             ref={imageInputRef}
+             
+            />
            </View>
+           
            {errorText != null ?(
              <Text>
                {errorText}
@@ -221,7 +215,7 @@ const RegisterScreen = (props) => {
             
            }
            <TouchableOpacity 
-            onPress={handleSubmit}
+            onPress={handleSubmitButton}
            >
              <Text>Register</Text>
            </TouchableOpacity>
@@ -233,3 +227,52 @@ const RegisterScreen = (props) => {
 }
 
 export default RegistrationScreen;
+
+const styles = StyleSheet.create({
+  sectionStyle: {
+    height: 40,
+    margin: 10,
+    marginTop: 20,
+    marginLeft: 35,
+    marginRight: 35
+  },
+
+  inputStyle: {
+    borderRadius: 30,
+    flex: 1,
+    color: white,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderWidth: 1,
+  },
+  errorTextStyle: {
+    color: 'red',
+    textAlign: 'center',
+    fontSize: 14,
+  },
+  successTextStyle: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 18,
+    padding: 30,
+  },
+  buttonStyle: {
+    backgroundColor: '#7DE24E',
+    borderWidth: 0,
+    color: '#FFFFFF',
+    borderColor: '#7DE24E',
+    height: 40,
+    alignItems: 'center',
+    borderRadius: 30,
+    marginLeft: 35,
+    marginRight: 35,
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  buttonTextStyle: {
+    color: '#FFFFFF',
+    paddingVertical: 10,
+    fontSize: 16,
+  },
+
+})
