@@ -22,7 +22,7 @@ const SplashScreen = ({navigation}) => {
        <View style={styles.container}>
            <Image
               source={
-                  require('../images/splash.gif')
+                  require('./images/splash.gif')
               }
               style={{width:'90%', resizeMode: 'contain', margin: 30}}
            />

@@ -3,15 +3,16 @@ import {
   View,
   StyleSheet,
   Image,
+  Text,
   TextInput,
+  ScrollView,
   TouchableOpacity,
   Keyboard,
   KeyboardAvoidingView } from "react-native"
-import { ScrollView } from 'react-native-gesture-handler';
 
 import Loader from './components/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const LoginScreen = (props) => {
+const LoginScreen = ({navigation}) => {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -47,7 +48,7 @@ const LoginScreen = (props) => {
     
     formBody = formBody.join('&');
 
-    fetch(url, {
+    fetch('http://localhost:9999/users/signin', {
        method: POST,
        body: formBody,
        headers: {
@@ -79,12 +80,15 @@ const LoginScreen = (props) => {
        <ScrollView
          keyboardShouldPersistTaps="handled"
          contentContainerStyle={{
+           flex: 1,
            justifyContent: 'center',
            alignContent: 'center'
          }}>
-         <View style={{alignItems: 'center'}}>
+        <View>
+         <KeyboardAvoidingView enabled>
+          <View style={{alignItems: 'center'}}>
            <Image 
-             source={require('../images/success.png')}
+             source={require('./images/success.png')}
              style={{
                width: '50%',
                height: 100,
@@ -93,10 +97,10 @@ const LoginScreen = (props) => {
              }}
            />
          </View>
-         <KeyboardAvoidingView enabled>
+         
            <View style={styles.sectionStyle}>
             <TextInput 
-              ref={emailInputRef}
+            style={styles.inputStyle}
               onChangeText={(email) => setEmail(email)}
               placeholder="Enter Email"
               underlineColorAndroid="#f000"
@@ -110,6 +114,7 @@ const LoginScreen = (props) => {
            </View>
            <View style={styles.sectionStyle}>
             <TextInput 
+              style={styles.inputStyle}
               ref={passwordInputRef}
               onChangeText={(password) => setPassword(password)}
               placeholder="Enter Password"
@@ -121,25 +126,29 @@ const LoginScreen = (props) => {
              />
            </View>
         
-           {errorText != null ?(
-             <Text>
+           {errorText != '' ?(
+             <Text style={styles.errorTextStyle}>
                {errorText}
              </Text>
            ) : null
             
            }
            <TouchableOpacity 
+           style={styles.buttonStyle}
+           activeOpacity={0.5}
             onPress={handleSubmitButton}
            >
-             <Text style={styles.registerTextStyle}>Login</Text>
+             <Text style={styles.buttonTextStyle}>Login</Text>
            </TouchableOpacity>
            
              <Text
-                 onPress={() => navigation.navigate('LoginScreen')}
+                 style={styles.registerTextStyle}
+                 onPress={() => navigation.navigate('RegisterScreen')}
                 >
                  Don't Have Account? Register
              </Text>
          </KeyboardAvoidingView>
+         </View> 
        </ScrollView>
      </View>
    ); 
@@ -168,7 +177,7 @@ const styles = StyleSheet.create({
   inputStyle: {
     borderRadius: 30,
     flex: 1,
-    color: white,
+    color: 'white',
     paddingLeft: 15,
     paddingRight: 15,
     borderWidth: 1,

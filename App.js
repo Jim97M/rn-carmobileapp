@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import RegistrationScreen from './src/RegisterScreen';
+import RegisterScreen from './src/RegisterScreen';
 import LoginScreen from './src/LoginScreen';
 import SplashScreen from './src/SplashScreen';
 import DrawerNavigationRoutes from './src/DrawerNavigationRoutes';
@@ -10,6 +10,7 @@ import DrawerNavigationRoutes from './src/DrawerNavigationRoutes';
 const Stack = createStackNavigator();
 
 const Auth = () => {
+  return(
     <Stack.Navigator initialRouteName='LoginScreen'>
        <Stack.Screen
          name='LoginScreen'
@@ -18,8 +19,8 @@ const Auth = () => {
        />
 
        <Stack.Screen
-         name='RegistrationScreen'
-         component={RegistrationScreen}
+         name='RegisterScreen'
+         component={RegisterScreen}
          options={{
              title: 'Register',
              headerStyle: {
@@ -33,6 +34,7 @@ const Auth = () => {
        />
 
     </Stack.Navigator>
+  );
 }
 
 const App = () => {
@@ -51,9 +53,8 @@ const App = () => {
          />
        {/* Navigation Drawer as a landing page */}
        <Stack.Screen
-          name="DrawerNavigationRoutes"
+          name='DrawerNavigationRoutes'
           component={DrawerNavigationRoutes}
-          // Hiding header for Navigation Drawer
           options={{headerShown: false}}
         />
           </Stack.Navigator>

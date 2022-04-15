@@ -45,3 +45,32 @@ const settingsScreenStack = ({navigation}) => {
     );
 };
 
+const DrawerNavigatorRoutes = (props) => {
+     return(
+         <Drawer.Navigator
+           drawerContentOptions={{
+               activeTintColor: '#cee1f2',
+               color: '#cee1f2',
+               itemStyle: {marginVertical: 5, color: 'white'},
+               labelStyle: {
+                   color: '#d8d8d8'
+               },
+           }}
+           screenOptions={{headerShown: false}}
+           drawerContent={CustomSidebarMenu}
+         >
+            <Drawer.Screen
+             name="homeScreenStack"
+             options={{drawerLabel: 'Home Screen'}}
+             component={homeScreenStack}
+           />
+           <Drawer.Screen
+             name="settingScreenStack"
+             options={{drawerLabel: 'Setting Screen'}}
+             component={settingsScreenStack}
+            />
+         </Drawer.Navigator>
+     )
+}
+
+export default DrawerNavigatorRoutes;

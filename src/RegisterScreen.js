@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
+  ImageData,
   KeyboardAvoidingView } from "react-native"
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -68,7 +69,7 @@ const RegisterScreen = (props) => {
     
     formBody = formBody.join('&');
 
-    fetch(url, {
+    fetch('http://localhost:9999/users/signup', {
        method: POST,
        body: formBody,
        headers: {
@@ -102,7 +103,7 @@ const RegisterScreen = (props) => {
        }}
       >
         <Image 
-          source={require('../images/tick.gif')}
+          source={require('./images/tick.gif')}
           style={{
             height: 150,
             resizeMode: 'contain',
@@ -133,7 +134,7 @@ const RegisterScreen = (props) => {
          }}>
          <View style={{alignItems: 'center'}}>
            <Image 
-             source={require('../images/success.png')}
+             source={require('./images/success.png')}
              style={{
                width: '50%',
                height: 100,
@@ -226,7 +227,7 @@ const RegisterScreen = (props) => {
 
 }
 
-export default RegistrationScreen;
+export default RegisterScreen;
 
 const styles = StyleSheet.create({
   sectionStyle: {
@@ -240,7 +241,7 @@ const styles = StyleSheet.create({
   inputStyle: {
     borderRadius: 30,
     flex: 1,
-    color: white,
+    color: 'white',
     paddingLeft: 15,
     paddingRight: 15,
     borderWidth: 1,
