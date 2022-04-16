@@ -1,19 +1,18 @@
 import React from 'react'
-import{
-    View,
-    Text,
-    SafeAreaView
-} from "react-native";
+import { View, StyleSheet, ImageBackground } from 'react-native';
+import { Text, Button } from 'react-native-elements';
+import useDates from '../hooks/useDates';
 
-const HomeScreen = () => {
-  return (
-  <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1}} >
-          <Text>HomeScreen</Text>
-      </View>
-  </SafeAreaView>
-  )
+const HomeScreen = ({navigation, dates}) => {
+    const {startDate, endDate} = dates;
+    const [pcpDate, retDate] = useDates(pcpDate, retDate);
+
+    return(
+      <>
+        <ImageBackground
+          source={}
+          resizeMode='cover'
+        />
+      </>
+    )
 }
-
-export default HomeScreen;
-
