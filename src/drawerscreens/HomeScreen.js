@@ -10,7 +10,7 @@ const HomeScreen = ({navigation, dates}) => {
     return(
       <>
         <ImageBackground
-          source={}
+          source={'../images/success.png'}
           resizeMode='cover'
         />
       </>

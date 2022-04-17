@@ -4,32 +4,57 @@ import {
   StyleSheet,
   Image,
   TextInput,
+  Text,
   TouchableOpacity,
-  Keyboard,
   ImageData,
-  KeyboardAvoidingView } from "react-native"
-import { ScrollView } from 'react-native-gesture-handler';
+  ScrollView,
+  Keyboard,
+  KeyboardAvoidingView
+} from "react-native"
 
-  import Loader from './components/Loader';
+import Loader from './components/Loader';
 const RegisterScreen = (props) => {
-  const [userName, setuserName] = useState('');
+  const [name, setuserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [image, setImage] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorText, seterrorText] = useState(false);
+  const [message, setMessage] = useState('');
   const [isRegistrationSuccess, setRegistrationSuccess] = useState(false);
   
   const emailInputRef = createRef();
-  const userInputRef = createRef();
   const phoneInputRef = createRef();
   const imageInputRef = createRef();
   const passwordInputRef = createRef();
 
+  const onLoggedIn = token => {
+    fetch('http://192.168.100.3:9999/car/getMakes', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(async res => { 
+        try {
+            const jsonRes = await res.json();
+            if (res.status === 200) {
+                setMessage(jsonRes.message);
+            }
+        } catch (err) {
+            console.log(err);
+        };
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
+
   const handleSubmitButton = () => {
     seterrorText('');
-    if(!userName){
+    if(!name){
       alert('Please Fill User Name');
       return;
     }
@@ -53,25 +78,25 @@ const RegisterScreen = (props) => {
     //Show Loader
     setLoading(true);
     var dataToSend = {
-      name: userName,
+      name: name,
       email: email,
       phone: phone,
       password: password,
       image: image
     };
 
-    var formBody = [];
-    for(var key in dataToSend){
-      var encodedKey = encodeURIComponent(key);
-      var encodedValue = encodeURIComponent(dataToSend[key]);
-      formBody.push(encodedKey + '=' + encodedValue);
-    }
+    // var formBody = [];
+    // for(var key in dataToSend){
+    //   var encodedKey = encodeURIComponent(key);
+    //   var encodedValue = encodeURIComponent(dataToSend[key]);
+    //   formBody.push(encodedKey + '=' + encodedValue);
+    // }
     
-    formBody = formBody.join('&');
-
-    fetch('http://localhost:9999/users/signup', {
-       method: POST,
-       body: formBody,
+    // formBody = formBody.join('&');
+    console.log(dataToSend);
+    fetch('http://192.168.100.3:9999/user/signup', {
+       method: 'POST',
+       body: JSON.stringify(dataToSend),
        headers: {
          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF8'
        }
@@ -79,7 +104,7 @@ const RegisterScreen = (props) => {
     .then((response) => response.json())
     .then((responseJson) => {
       setLoading(false);
-      
+      console.log(responseJson);
       if(responseJson.status == 'success'){
         setRegistrationSuccess(true);
         console.log("Registred Successfully");
@@ -144,25 +169,11 @@ const RegisterScreen = (props) => {
            />
          </View>
          <KeyboardAvoidingView enabled>
-           <View>
+           <View style={styles.sectionStyle}>
             <TextInput 
-              ref={userInputRef}
-              onChangeText={(userName) => setuserName(userName)}
+              style={styles.inputStyle}
+              onChangeText={setuserName}
               placeholder="Enter Name"
-              underlineColorAndroid="#f000"
-              autoCapitalize="sentences"
-              returnKeyType="next"
-              onSubmitEditing={() => 
-                userInputRef.current && userInputRef.current.focus()
-              }
-                blurOnSubmit={false}
-             />
-           </View>
-           <View>
-            <TextInput 
-              ref={emailInputRef}
-              onChangeText={(email) => setEmail(email)}
-              placeholder="Enter Email"
               underlineColorAndroid="#f000"
               autoCapitalize="sentences"
               returnKeyType="next"
@@ -172,41 +183,72 @@ const RegisterScreen = (props) => {
                 blurOnSubmit={false}
              />
            </View>
-           <View>
+           <View style={styles.sectionStyle}>
             <TextInput 
-              ref={phoneInputRef}
-              onChangeText={(phone) => setPhone(phone)}
-              placeholder="Enter Phone"
+              style={styles.inputStyle}
+              onChangeText={setEmail}
+              placeholder="Enter Email"
               underlineColorAndroid="#f000"
               autoCapitalize="sentences"
               returnKeyType="next"
+              ref={emailInputRef}
               onSubmitEditing={() => 
                 phoneInputRef.current && phoneInputRef.current.focus()
               }
                 blurOnSubmit={false}
              />
            </View>
-           <View>
+           <View style={styles.sectionStyle}>
             <TextInput 
-              ref={passwordInputRef}
-              onChangeText={(password) => setPassword(password)}
-              placeholder="Enter Password"
+              style={styles.inputStyle}
+            
+              onChangeText={setPhone}
+              placeholder="Enter Phone"
               underlineColorAndroid="#f000"
               autoCapitalize="sentences"
               returnKeyType="next"
+              ref={phoneInputRef}
+              onSubmitEditing={() => 
+                imageInputRef.current && imageInputRef.current.focus()
+              }
+                blurOnSubmit={false}
+             />
+           </View>
+           <View style={styles.sectionStyle}>
+            <TextInput 
+            style={styles.inputStyle}
+              onChangeText={setImage}
+              placeholder="Enter Image"
+              underlineColorAndroid="#f000"
+              autoCapitalize="sentences"
+              returnKeyType="next"
+              ref={imageInputRef}
               onSubmitEditing={() => 
                 passwordInputRef.current && passwordInputRef.current.focus()
               }
                 blurOnSubmit={false}
              />
            </View>
+           <View style={styles.sectionStyle}>
+            <TextInput 
+            style={styles.inputStyle}
+              onChangeText={setPassword}
+              placeholder="Enter Password"
+              underlineColorAndroid="#f000"
+              autoCapitalize="sentences"
+              returnKeyType="next"
+              ref={passwordInputRef}
+              onSubmitEditing={Keyboard.dismiss}
+                blurOnSubmit={false}
+             />
+           </View>
            
-           <View>
+           {/* <View>
             <ImageData
              ref={imageInputRef}
              
-            />
-           </View>
+            /> */}
+           {/* </View> */}
            
            {errorText != null ?(
              <Text>
@@ -216,9 +258,10 @@ const RegisterScreen = (props) => {
             
            }
            <TouchableOpacity 
+           style={styles.buttonStyle}
             onPress={handleSubmitButton}
            >
-             <Text>Register</Text>
+             <Text style={styles.buttonTextStyle}>Register</Text>
            </TouchableOpacity>
          </KeyboardAvoidingView>
        </ScrollView>

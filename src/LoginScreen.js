@@ -18,6 +18,7 @@ const LoginScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorText, seterrorText] = useState(false);
+  const [message, setMessage] = useState('');
   
   const passwordInputRef = createRef();
 
@@ -35,44 +36,44 @@ const LoginScreen = ({navigation}) => {
     //Show Loader
     setLoading(true);
     var dataToSend = {
-      email: email,
-      password: password,
+       email,
+       password,
     };
 
-    var formBody = [];
-    for(var key in dataToSend){
-      var encodedKey = encodeURIComponent(key);
-      var encodedValue = encodeURIComponent(dataToSend[key]);
-      formBody.push(encodedKey + '=' + encodedValue);
-    }
+    // var formBody = [];
+    // for(var key in dataToSend){
+    //   var encodedKey = encodeURIComponent(key);
+    //   var encodedValue = encodeURIComponent(dataToSend[key]);
+    //   formBody.push(encodedKey + '=' + encodedValue);
+    // }
     
-    formBody = formBody.join('&');
+    // formBody = formBody.join('&');
 
-    fetch('http://localhost:9999/users/signin', {
-       method: POST,
-       body: formBody,
+    console.log(dataToSend);
+
+    fetch('http://192.168.100.3:9999/user/signin', {
+       method: 'POST',
+       body: JSON.stringify(dataToSend),
        headers: {
          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF8'
        }
     })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      setLoading(false); 
-      console.log(responseJson);
-      if(responseJson.status == 'success'){
-        AsyncStorage.setItem('user_id', responseJson.data.email)
-        console.log(responseJson.data.email);
-        navigation.replace('DrawerNavigationRoutes');
-      }else{
-        seterrorText(responseJson.msg);
-        console.log('Please Check email or Password');
-      }
-    }).catch((error) => {
-      setLoading(false);
-      console.error(error);
+    .then(async res => {
+      try {
+        const jsonRes = await res.json();
+        if (res.status !== 200) {
+            seterrorText(true);
+            setMessage(jsonRes.message);
+        } else {
+          AsyncStorage.setItem('user_id', jsonRes.data.email)
+         navigation.replace('DrawerNavigationRoutes');
+        }
+    } catch (err) {
+        console.log(err);
+    };
     })
-  } 
 
+  }
 
    return(
      <View style={styles.mainBody}>
@@ -101,7 +102,7 @@ const LoginScreen = ({navigation}) => {
            <View style={styles.sectionStyle}>
             <TextInput 
             style={styles.inputStyle}
-              onChangeText={(email) => setEmail(email)}
+              onChangeText={setEmail}
               placeholder="Enter Email"
               underlineColorAndroid="#f000"
               autoCapitalize="sentences"
@@ -116,7 +117,7 @@ const LoginScreen = ({navigation}) => {
             <TextInput 
               style={styles.inputStyle}
               ref={passwordInputRef}
-              onChangeText={(password) => setPassword(password)}
+              onChangeText={setPassword}
               placeholder="Enter Password"
               underlineColorAndroid="#f000"
               autoCapitalize="sentences"
