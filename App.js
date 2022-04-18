@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import RegisterScreen from './src/RegisterScreen';
+import SignUpScreen from './src/SignUpScreen';
 import LoginScreen from './src/LoginScreen';
 import SplashScreen from './src/SplashScreen';
 import DrawerNavigationRoutes from './src/DrawerNavigationRoutes';
@@ -19,8 +19,8 @@ const Auth = () => {
        />
 
        <Stack.Screen
-         name='RegisterScreen'
-         component={RegisterScreen}
+         name='SignUpScreen'
+         component={SignUpScreen}
          options={{
              title: 'Register',
              headerStyle: {
