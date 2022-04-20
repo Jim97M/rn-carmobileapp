@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, TouchableOpacity, View, Image } from "react-native";
 import { styles } from "./styles";
-import firebase from "firebase";
+//import firebase from "firebase";
 import { connect } from "react-redux";
 import { returned_car } from "../../actions/returnedCar";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
@@ -14,32 +14,32 @@ const ActiveCarScreen = props => {
   }, []);
 
   const isCarStarted = () => {
-    firebase
-      .database()
-      .ref("registeredCar")
-      .orderByChild("registeredBy")
-      .equalTo("Hamza")
-      .once("value", snapshot => {
-        snapshot.forEach(function (data) {
-          data.ref.child("isDriving").set(true);
-        });
-      });
+   // firebase
+      //.database()
+      // .ref("registeredCar")
+      // .orderByChild("registeredBy")
+      // .equalTo("Hamza")
+      // .once("value", snapshot => {
+      //   snapshot.forEach(function (data) {
+      //     data.ref.child("isDriving").set(true);
+      //   });
+      // });
   };
   const getData = () => {
-    firebase
-      .database()
-      .ref("registeredCar")
-      .orderByChild("registeredBy")
-      .equalTo("Hamza")
-      .on("value", snapshot => {
-        let isCarStarted = false;
-        snapshot.forEach(function (data) {
-          if (data.child("isDriving").val()) {
-            isCarStarted = true;
-          }
-        });
-        isCarActive(isCarStarted);
-      });
+   // firebase
+    //  .database()
+      // .ref("registeredCar")
+      // .orderByChild("registeredBy")
+      // .equalTo("Hamza")
+      // .on("value", snapshot => {
+      //   let isCarStarted = false;
+      //   snapshot.forEach(function (data) {
+      //     if (data.child("isDriving").val()) {
+      //       isCarStarted = true;
+      //     }
+      //   });
+      //   isCarActive(isCarStarted);
+      // });
   };
 
   const setPastBooking = () => {
@@ -48,16 +48,16 @@ const ActiveCarScreen = props => {
   };
 
   const returnedCar = () => {
-    firebase
-      .database()
-      .ref("registeredCar")
-      .orderByChild("registeredBy")
-      .equalTo("Hamza")
-      .once("value", snapshot => {
-        snapshot.forEach(function (data) {
-          data.ref.child("isRegistered").set(false);
-        });
-      });
+   // firebase
+      //.database()
+      // .ref("registeredCar")
+      // .orderByChild("registeredBy")
+      // .equalTo("Hamza")
+      // .once("value", snapshot => {
+      //   snapshot.forEach(function (data) {
+      //     data.ref.child("isRegistered").set(false);
+      //   });
+      // });
   };
 
   return (
@@ -71,7 +71,7 @@ const ActiveCarScreen = props => {
       <View style={styles.subContainer}>
         <Image
           style={styles.tinyLogo}
-          source={require("../../../assets/reserved.png")}
+          source={require("../../images/time.png")}
         />
       </View>
       <View style={styles.subContent}>
@@ -152,13 +152,13 @@ const ActiveCarScreen = props => {
               <View style={styles.lockItem}>
                 <Image
                   style={styles.lock}
-                  source={require("../../../assets/lock_open.png")}
+                  source={require("../../images/time.png")}
                 />
               </View>
               <View style={styles.lockItem}>
                 <Image
                   style={styles.lock}
-                  source={require("../../../assets/lock.png")}
+                  source={require("../../images/time.png")}
                 />
               </View>
               <View style={styles.lockItemContent}>

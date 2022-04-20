@@ -21,7 +21,7 @@ const CarItem = props => {
       <View style={styles.subcontainers}>
         <Image
           style={styles.tinyLogo}
-          source={require("../../../assets/car_image.png")}
+          source={require("../../images/time.png")}
         />
         <View style={styles.subcontainer}>
           <Text style={styles.carname}>{props.name}</Text>

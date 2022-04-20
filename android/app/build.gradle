@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 
+apply plugin: 'com.google.gms.google-services'
 import com.android.build.OutputFile
 
 /**
@@ -133,6 +134,15 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    signingConfigs {
+      release {
+       storeFile file('my-release-key.keystore')
+       storePassword 'carapp123'
+       keyAlias 'carapp'
+       keyPassword 'carapp123'
+      }
+     }
+
     defaultConfig {
         applicationId "com.car_mobileapp"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -256,6 +266,12 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+ 
+    implementation platform('com.google.firebase:firebase-bom:29.3.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-database'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'

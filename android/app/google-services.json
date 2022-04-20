@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "653115049678",
+    "project_id": "carrentapp-c369a",
+    "storage_bucket": "carrentapp-c369a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653115049678:android:1e41dbf4bc6ef76b80b29f",
+        "android_client_info": {
+          "package_name": "com.car_mobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653115049678-9frbi8vbl5066kpcnh64f7oeqr696o1u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3kxugS6XCigYkusrpwV9qJ9j0Qgo5ulE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653115049678-9frbi8vbl5066kpcnh64f7oeqr696o1u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

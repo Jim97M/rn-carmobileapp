@@ -4,12 +4,12 @@ import { createAppContainer } from "react-navigation";
 import { createMaterialTopTabNavigator } from "react-navigation-tabs";
 import { createStackNavigator } from "react-navigation-stack";
 
-import DrivingScreen from "./drivingScreen/index";
-import PastBookingScreen from "./pastBookingScreen/index";
+import DriveNowScreen from "../car/drivingScreen/index";
+import PastBookingScreen from "../car/pastBookingScreen/index";
 
 const DrivingStack = createStackNavigator(
   {
-    Driving: DrivingScreen
+    Driving: DriveNowScreen
   },
   {
     defaultNavigationOptions: {
@@ -30,7 +30,7 @@ const PastBookStack = createStackNavigator(
 );
 
 const TabNavigator = createMaterialTopTabNavigator({
-  DriveScreen: {
+  DriveNowScreen: {
     screen: DrivingStack,
     navigationOptions: {
       tabBarLabel: "DRIVING NOW",

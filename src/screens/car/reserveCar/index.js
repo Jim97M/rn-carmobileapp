@@ -21,7 +21,7 @@ const ReserveCarScreen = props => {
         >
           <Image
             style={styles.tinyLogo}
-            source={require("../../../../assets/time.png")}
+            source={require("../../../images/time.png")}
           />
           <Text style={styles.buttonContent}>00:30 AM - Wed, 28/09/2020</Text>
         </TouchableOpacity>
@@ -33,7 +33,7 @@ const ReserveCarScreen = props => {
         >
           <Image
             style={styles.tinyLogo}
-            source={require("../../../../assets/end.png")}
+            source={require("../../../images/end.png")}
           />
           <Text style={styles.buttonContent}>00:30 AM - Wed, 28/09/2020</Text>
         </TouchableOpacity>
