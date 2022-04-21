@@ -1,29 +1,29 @@
-//import firebase from "firebase";
 import { GET_ALL_CARS } from "./types";
 import Toast from "react-native-toast-message";
+import database from "@react-native-firebase/database";
+import storage from "@react-native-firebase/storage";
 
 export const getAllCar = () => dispatch => {
   let dataList = [];
-//   firebase
-//     .database()
-//     .ref("rentCarsList")
-//     .orderByChild("name")
-//     .once("value")
-//     .then(snapshot => {
-//       snapshot.forEach(child => {
-//         dataList.push(child.val());
-//       });
-//       dispatch({
-//         type: GET_ALL_CARS,
-//         payload: dataList
-//       });
-//     })
-//     .catch(error => {
-//       dispatch({
-//         type: GET_ALL_CARS,
-//         payload: []
-//       });
-//     });
+      database()
+      .ref("/User")
+      .orderByChild("name")
+      .once("value")
+      .then(snapshot => {
+       snapshot.forEach(child => {
+         dataList.push(child.val());
+       });
+       dispatch({
+         type: GET_ALL_CARS,
+         payload: dataList
+       });
+     })
+     .catch(error => {
+       dispatch({
+         type: GET_ALL_CARS,
+         payload: []
+       });
+     });
 };
 
 //CREATE
@@ -68,10 +68,10 @@ async function uploadImageAsync(uri, name) {
     xhr.send(null);
   });
 
-//   const ref = firebase
-//     .storage()
-//     .ref()
-//     .child("uploads/" + name);
+   const ref = database
+     .storage() 
+        .ref()
+      .child("uploads/" + name);
   const snapshot = await ref.put(blob);
 
   // We're done with the blob, close and release it

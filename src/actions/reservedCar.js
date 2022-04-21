@@ -1,11 +1,11 @@
-//import firebase from "firebase";
+import database from "@react-native-firebase/database";
 import { RESERVE_CAR } from "./types";
 
 import Toast from "react-native-toast-message";
 
 export const reserve_car = (registeredCar, props) => dispatch => {
-  let registeredCarRef; // = 
-  //firebase.ref("registeredCar");
+  let registeredCarRef = database().ref("registeredCar");
+  database.ref("registeredCar");
   let newCarRegisteredRef = registeredCarRef.push();
   newCarRegisteredRef
     .set(registeredCar)

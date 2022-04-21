@@ -6,6 +6,7 @@ import HomeScreen from './drawerscreens/HomeScreen';
 import SettingScreen from './drawerscreens/SettingScreen';
 import CustomSidebarMenu from './components/CustomSidebarMenu';
 import NavigationDrawerHeader from './components/NavigationDrawerHeader';
+import Card from './components/Card'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -26,6 +27,25 @@ const homeScreenStack = ({navigation}) => {
         </Stack.Navigator>
     );
 };
+
+
+const cardScreenStack = ({navigation}) => {
+    return (
+        <Stack.Navigator initialRouteName='CardScreen' >
+          <Stack.Screen
+           name="CardScreen"
+           component={Card}
+           options={{
+               title: 'Card', //Set Header Title
+               headerLeft: () => {
+                   <NavigationDrawerHeader navigationProps={navigation} />
+               }
+           }}
+          />
+        </Stack.Navigator>
+    );
+};
+
 
 const settingsScreenStack = ({navigation}) => {
     return (
@@ -63,6 +83,11 @@ const DrawerNavigatorRoutes = (props) => {
              name="homeScreenStack"
              options={{drawerLabel: 'Home Screen'}}
              component={homeScreenStack}
+           />
+             <Drawer.Screen
+             name="cardScreenStack"
+             options={{drawerLabel: 'Card Screen'}}
+             component={cardScreenStack}
            />
            <Drawer.Screen
              name="settingScreenStack"

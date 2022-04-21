@@ -6,6 +6,7 @@ import SignUpScreen from './src/SignUpScreen';
 import LoginScreen from './src/LoginScreen';
 import SplashScreen from './src/SplashScreen';
 import DrawerNavigationRoutes from './src/DrawerNavigationRoutes';
+import Card from './src/components/Card';
 
 const Stack = createStackNavigator();
 
@@ -57,6 +58,11 @@ const App = () => {
           component={DrawerNavigationRoutes}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+         name='Card'
+         component={Card}
+         options={{headerShown: false}}
+         />
           </Stack.Navigator>
        </NavigationContainer>
    )

@@ -3,25 +3,29 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { connect } from "react-redux";
 import { reserve_car } from "../../actions/reservedCar";
-
+import { useNavigation } from "@react-navigation/native";
+import Card from '../Card';
 const CarItem = props => {
-  const handleSubmit = item => {
-    const registeredCar = {
-      car: item,
-      isRegistered: true,
-      registeredBy: "Hamza",
-      isDriving: false
-    };
-    props.reserve_car(registeredCar, props);
-  };
-  console.log("=>" + props.flag);
+
+  const navigation = useNavigation();
+
+  // const handleSubmit = item => {
+  //   const registeredCar = {
+  //     car: item,
+  //     isRegistered: true,
+  //     registeredBy: "Toyota",
+  //     isDriving: false
+  //   };
+  //   props.reserve_car(registeredCar, props);
+  // };
+  // console.log("=>" + props.flag);
 
   return (
     <View style={styles.container}>
       <View style={styles.subcontainers}>
         <Image
           style={styles.tinyLogo}
-          source={require("../../images/time.png")}
+          source={require("../../images/car_red.png")}
         />
         <View style={styles.subcontainer}>
           <Text style={styles.carname}>{props.name}</Text>
@@ -38,7 +42,7 @@ const CarItem = props => {
       />
       <View style={styles.carrateContainer}>
         <Text style={styles.carratefont}>MYR 20.00 / HR</Text>
-        <TouchableOpacity onPress={() => handleSubmit(props.name)}>
+        <TouchableOpacity onPress={() => navigation.navigate('Card')}>
           <Text style={styles.carratefontB}>BOOK NOW</Text>
         </TouchableOpacity>
       </View>

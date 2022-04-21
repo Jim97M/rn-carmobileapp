@@ -1,10 +1,10 @@
-//import firebase from "firebase";
+import database from "@react-native-firebase/database";
 import { RETURN_CAR } from "./types";
 
 import Toast from "react-native-toast-message";
 
 export const returned_car = (pastBooking, props) => dispatch => {
-  let pastBookingRef; // = firebase.ref("pastBooking");
+  let pastBookingRef = database.ref("/User");
   let newPastBookingRef = pastBookingRef.push();
   newPastBookingRef
     .set(pastBooking)
@@ -30,18 +30,18 @@ export const returned_car = (pastBooking, props) => dispatch => {
 };
 
 export const getMyPastBooking = () => dispatch => {
- // firebase
-    //.database()
-    // .ref("pastBooking")
-    // .orderByChild("name")
-    // .on("value", snapshot => {
-    //   let dataList = [];
-    //   snapshot.forEach(child => {
-    //     dataList.push(child.val());
-    //   });
-    //   dispatch({
-    //     type: "PAST",
-    //     payload: dataList
-    //   });
-    // });
+ database()
+    .ref("/User")
+    .orderByChild("name")
+    .on("value", snapshot => {
+      let dataList = [];
+      snapshot.forEach(child => {
+        dataList.push(child.val());
+      });
+      dispatch({
+        type: "PAST",
+        payload: dataList
+      });
+    });
 };
+
