@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
 import {
-  Button,
   Image,
   View,
   TouchableOpacity,
-  Platform,
   Text
 } from "react-native";
 
 import { globalStyles } from "../styles/global";
-import Constants from "expo-constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const ImagePickerComp = props => {
