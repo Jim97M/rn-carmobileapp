@@ -3,6 +3,7 @@ import { globalStyles } from "../../../styles/global";
 import { styles } from "./styles";
 import { useForm } from "../../../customHooks/useForm";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+import {launchImageLibrary} from 'react-native-image-picker';
 import Axios from "axios";
 
 import {
@@ -18,39 +19,89 @@ import {
 
 const ListYourCarScreen = ({navigation}) => {
 
+  const [photo, setPhoto] = useState(null);
   const [data, setData] = useState({
+     name: "",
+     model: "",
+     rate: "",
+     color: "",
+     address: "",
+     description : "",
+     image: "",
+     checkTextInputChange: false 
+  });
+
+  const [res, setRes] = useState({
+    err: "",
+    res: ""
+  });
+
+  const nameChange = (val) => {
+    if(val.length !== 0){
+      setData({
+        ...data,
+        name: val,
+        checkTextInputChange: true
+      })
+    }else{
+      console.log("Fill In");
+    }
+  }
+  const colorChange = (val) => {
+    if(val.length !== 0){
+      setData({
+        ...data,
+        color: val,
+        checkTextInputChange: true
+      })
+    }else{
+      console.log("Fill in the blank")
+    }
+  }
+
+  const modelChange = (val) => {
+    if(val.length !== 0){
+      setData({
+        ...data,
+        model: val,
+        checkTextInputChange: true
+      })
+    } else {
+      console.log("Fill In");
+    }
+  }
+
+  const rateChange = (val) => {
+    if(val.length !== 0){
+      setData({
+        ...data,
+        rate: val,
+        checkTextInputChange: true
+      })
+    }
+  }
+
+  const descriptionChange = (val) => {
+    if(val.length !== 0){
+      setData({
+        ...data,
+        name: val,
+        checkTextInputChange: true
+      })
+    }
+  }
+
+  
+
+  const handleChoosePhoto = () => {
+    launchImageLibrary({noData: true}, (response) => {
+      if(response){
+        setPhoto(response)
+      }
+    })
+  }
     
-  })
-
-  // const handleSubmit = e => {
-  //   const object = {
-  //     ...values,
-  //     rate,
-  //     image
-  //   };
-  //   if (isEmpty(object)) {
-  //     showAlert("Kindly fill all the fields");
-  //   } else {
-  //     isLoading(true);
-  //     props.createCarList(object, props);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   LogBox.ignoreWarnings(["Animated: `useNativeDriver`"]);
-  //   checkImageStatus();
-  // }, []);
-    //     {Loading ? (
-  //       <AnimatedCircularProgress
-  //         style={styles.animatedCircular}
-  //         size={50}
-  //         width={10}
-  //         fill={100}
-  //         duration={2000}
-  //         tintColor="#00e0ff"
-  //         backgroundColor="#3d5875"
-  //       />
-  //     ) : (
+  
 
   return (
     <View style={globalStyles.container}>
@@ -102,7 +153,7 @@ const ListYourCarScreen = ({navigation}) => {
              <TouchableOpacity
               style={styles.buttonStyle}
               activeOpacity={0.5}
-              onPress={selectFile}>
+              onPress={handleChoosePhoto}>
                <Text style={styles.buttonTextStyle}>Select Image</Text>
              </TouchableOpacity>
            
@@ -120,11 +171,6 @@ const ListYourCarScreen = ({navigation}) => {
   );
 };
 
-// ListYourCarScreen.navigationOptions = commonNavigation("List your car");
 
-// const mapStateToProps = state => ({
-//   status: state.my_car.status
-// });
 
 export default ListYourCarScreen;
-//connect(mapStateToProps, { createCarList })(ListYourCarScreen);
