@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { globalStyles } from "../../../styles/global";
 import { styles } from "./styles";
-import ImagePickerComp from "../../../utilities/ImagePicker";
 import { useForm } from "../../../customHooks/useForm";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
-import { createCarList } from "../../../actions/rentCarList";
+import Axios from "axios";
 
 import {
   TextInput,
@@ -12,15 +11,16 @@ import {
   Text,
   LogBox,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Alert
 } from "react-native";
 
 
-const ListYourCarScreen = props => {
+const ListYourCarScreen = ({navigation}) => {
 
-  // const [image, setImage] = useState(null);
-  // const [rate, setRate] = useState(25);
-  // const [Loading, isLoading] = useState(false);
+  const [data, setData] = useState({
+    
+  })
 
   // const handleSubmit = e => {
   //   const object = {
