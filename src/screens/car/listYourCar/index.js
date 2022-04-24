@@ -78,13 +78,7 @@ const ListYourCarScreen = props => {
              // value={values.color}
             />
            
-           <TextInput
-              placeholder="Car Brand"
-              style={globalStyles.input}
-             // onChangeText={txt => handleChange("color", txt)}
-             // value={values.color}
-            />
-            
+       
             <TextInput
               placeholder="Car Rate"
               style={globalStyles.input}
@@ -99,6 +93,11 @@ const ListYourCarScreen = props => {
               //onChangeText={txt => handleChange("address", txt)}
               //value={values.address}
             />
+
+            <TextInput
+              placeholder="Description"
+              style={globalStyles.input}
+                />
 
              <TouchableOpacity
               style={styles.buttonStyle}
