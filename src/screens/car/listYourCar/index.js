@@ -21,7 +21,7 @@ const ListYourCarScreen = ({navigation}) => {
 
   const [photo, setPhoto] = useState(null);
   const [data, setData] = useState({
-     name: "",
+     brandname: "",
      model: "",
      rate: "",
      color: "",
@@ -40,7 +40,7 @@ const ListYourCarScreen = ({navigation}) => {
     if(val.length !== 0){
       setData({
         ...data,
-        name: val,
+        brandname: val,
         checkTextInputChange: true
       })
     }else{
@@ -85,12 +85,21 @@ const ListYourCarScreen = ({navigation}) => {
     if(val.length !== 0){
       setData({
         ...data,
-        name: val,
+        description: val,
         checkTextInputChange: true
       })
     }
   }
 
+  const addressChange = (val) => {
+    if(val.address !== 0){
+      setData({
+        ...data,
+        address: val,
+        checkTextInputChange: true
+      })
+    }
+  }
   
 
   const handleChoosePhoto = () => {
@@ -101,6 +110,18 @@ const ListYourCarScreen = ({navigation}) => {
     })
   }
     
+  const handleSubmit = () => {
+    const {brandname, model, color, rate, description, address, photo} = data;
+    Axios.post('http://192.168.100.3:9999/car/carpost', {
+      brandname,
+      model,
+      color,
+      rate,
+      description,
+      address,
+      photo
+    }).then(res=> console.log(res))
+  }
   
 
   return (
@@ -111,43 +132,40 @@ const ListYourCarScreen = ({navigation}) => {
           <View style={styles.container}>
             <Text style={globalStyles.heading}>Car Information</Text>
             <TextInput
-              placeholder="Car name"
+              placeholder="Car Brand Name"
               style={globalStyles.input}
-             // onChangeText={txt => handleChange("name", txt)}
-             // value={values.name}
+              onChangeText={(val) => nameChange(val)}
             />
             <TextInput
               placeholder="Car color"
               style={globalStyles.input}
-             // onChangeText={txt => handleChange("color", txt)}
-             // value={values.color}
+              onChangeText={(val) => colorChange(val)}
             />
              <TextInput
-              placeholder="Car Brand"
+              placeholder="Car Model"
               style={globalStyles.input}
-             // onChangeText={txt => handleChange("color", txt)}
-             // value={values.color}
+              onChangeText={(val) => modelChange(val)}
             />
            
        
             <TextInput
-              placeholder="Car Rate"
+              placeholder="Car Description"
               style={globalStyles.input}
-             // onChangeText={txt => handleChange("color", txt)}
-             // value={values.color}
+              onChangeText={(val) => descriptionChange(val)}
             />
              
             <Text style={globalStyles.heading}>Address line</Text>
             <TextInput
               placeholder="Address"
               style={globalStyles.input}
-              //onChangeText={txt => handleChange("address", txt)}
-              //value={values.address}
+              onChangeText={(val) => addressChange(val)}
+              
             />
 
             <TextInput
-              placeholder="Description"
+              placeholder="Rent Rate"
               style={globalStyles.input}
+              onChangeText={(val) => rateChange(val)}
                 />
 
              <TouchableOpacity
