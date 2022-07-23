@@ -12,9 +12,10 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
+    StatusBar,
+    FlatList,
+    SafeAreaView
 } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-navigation';
 
 const COLORS = {primary: '#282534', white: '#fff'};
 
