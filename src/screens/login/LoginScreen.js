@@ -14,6 +14,8 @@ import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from 'react-native-paper';
+import TabNavigator from '../../navigation/TabNavigator';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import Axios from "axios";
 const LoginScreen = ({navigation}) => {
 
@@ -82,19 +84,31 @@ const LoginScreen = ({navigation}) => {
         }
     };
 
-    const login=()=>{
+    const login= async (req, res)=>{
         const{ email, password }=data;
-        Axios.post("http://192.168.100.3:9999/user/login",{
+        Axios.post("http://192.168.0.29:9999/user/login",{
             email,
             password,
-        }).then(res=>console.log(res));
-        navigation.reset({
-            index: 0,
-            routes: [{name: 'DrawerNavigationRoutes'}]
-        })
+        });
+          if (res.data.status === "success"){
+            navigation.navigate('Home');
+          }  
+          if(res.data.status === "failed"){
+            Toast.show({
+                type: 'warning',
+                position: 'top',
+                topOffset: 0,
+            })
+          }
+        
+        
     };
 
     const { colors } = useTheme();
+
+    const clickHandler = () => {
+        navigation.navigate('')
+    }
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor='#009387' barStyle="light-content"/>

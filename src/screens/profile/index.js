@@ -1,3 +1,5 @@
+/* eslint-disable quotes */
+/* eslint-disable prettier/prettier */
 import React from "react";
 
 import { createAppContainer } from "react-navigation";

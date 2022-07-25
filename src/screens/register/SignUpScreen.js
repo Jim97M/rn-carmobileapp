@@ -63,7 +63,7 @@ const SignUpScreen = ({navigation}) => {
 
     const registerUser=()=>{
       const{email,password,confirmPassword}=data;
-        Axios.post("http://192.168.100.3:9999/user/register",{
+        Axios.post("http://192.168.0.29:9999/user/register",{
             email,
             password,
             confirmPassword
@@ -239,18 +239,6 @@ const SignUpScreen = ({navigation}) => {
                     <Text style={[styles.color_textPrivate, {fontWeight: 'bold'}]}>{" "}Privacy policy</Text>
                 </View>
                 <View style={styles.button}>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate('LoginScreen')}
-                        style={[styles.signIn, {
-                            borderColor: '#009387',
-                            borderWidth: 1,
-                            marginTop: 5
-                        }]}
-                    >
-                        <Text style={[styles.textSign, {
-                            color: '#009387'
-                        }]}>Sign In</Text>
-                    </TouchableOpacity>
 
                     <TouchableOpacity
                         onPress={() => {registerUser()}}
@@ -264,6 +252,20 @@ const SignUpScreen = ({navigation}) => {
                             color: '#009387'
                         }]}>Sign Up</Text>
                     </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('LoginScreen')}
+                        style={[styles.signIn, {
+                            borderColor: '#009387',
+                            borderWidth: 1,
+                            marginTop: 5
+                        }]}
+                    >
+                        <Text style={[styles.textSign, {
+                            color: '#009387'
+                        }]}>Sign In</Text>
+                    </TouchableOpacity>
+
                 </View>
 
             </Animatable.View>
