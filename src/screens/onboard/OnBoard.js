@@ -25,19 +25,19 @@ const slideItems = [
         id: 1,
         title: "Best Cars",
         description: "Find Car To Book",
-        image: "../../images/car_sleek.png",
+        image: require('../../images/car_sleek.png'),
     },
     {
         id: 2,
         title: "Book Car",
         description: "Rent Easy",
-        image: "../../images/car_saloon.png",
+        image: require('../../images/car_lambo.png'),
     },
     {
         id: 1,
         title: "Start Now",
         description: "Lets Get Started",
-        image: "../../images/car_red.png",
+        image: require('../../images/car_red.png'),
     },
 
 ];

@@ -14,7 +14,6 @@ import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from 'react-native-paper';
-import TabNavigator from '../../navigation/TabNavigator';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import Axios from 'axios';
 const LoginScreen = ({navigation}) => {
@@ -86,7 +85,7 @@ const LoginScreen = ({navigation}) => {
 
     const login = ()=>{
         const{ email, password }=data;
-       Axios.post('http://192.168.0.29:9999/user/login',{
+       Axios.post('http://192.168.100.254:9999/user/login',{
             email,
             password,
         }).then(async function (res){
