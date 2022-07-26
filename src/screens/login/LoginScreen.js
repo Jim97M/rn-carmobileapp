@@ -16,12 +16,12 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from 'react-native-paper';
 import TabNavigator from '../../navigation/TabNavigator';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
-import Axios from "axios";
+import Axios from 'axios';
 const LoginScreen = ({navigation}) => {
 
     const [data,setData]=useState({
-        email:"",
-        password:"",
+        email:'',
+        password:'',
         checkTextInputChange:false,
         secureTextEntry:true,
         isValidUser:true,
@@ -84,22 +84,33 @@ const LoginScreen = ({navigation}) => {
         }
     };
 
-    const login= async (req, res)=>{
+    const login = ()=>{
         const{ email, password }=data;
-        Axios.post("http://192.168.0.29:9999/user/login",{
+       Axios.post('http://192.168.0.29:9999/user/login',{
             email,
             password,
-        });
-          if (res.data.status === "success"){
-            navigation.navigate('Home');
-          }  
-          if(res.data.status === "failed"){
+        }).then(async function (res){
+            if(res.data){
+                navigation.navigate('Home');
+            }
+            if(!res.data){
+                
             Toast.show({
                 type: 'warning',
                 position: 'top',
                 topOffset: 0,
             })
-          }
+            }
+        }
+             
+        
+          
+        
+
+        
+        
+          
+        )
         
         
     };
@@ -123,14 +134,14 @@ const LoginScreen = ({navigation}) => {
                         color: colors.text
                     }]}>Email</Text>
                     <View style={styles.style1}>
-                        <View style={{flexDirection:"row"}}>
+                        <View style={{flexDirection:'row'}}>
                             <FontAwesome
                                 name="user-o"
                                 color={colors.text}
                                 size={20}
                             />
                             <TextInput
-                                placeholder={"Your Email"}
+                                placeholder={'Your Email'}
                                 placeholderTextColor="#666666"
                                 style={[styles.textInput, {
                                     color: colors.text
@@ -163,14 +174,14 @@ const LoginScreen = ({navigation}) => {
                         color: colors.text
                     }]}>Password</Text>
                     <View style={styles.style1}>
-                        <View style={{flexDirection:"row"}}>
+                        <View style={{flexDirection:'row'}}>
                             <Feather
                                 name="lock"
                                 color={colors.text}
                                 size={20}
                             />
                             <TextInput
-                                placeholder={"Your Password"}
+                                placeholder={'Your Password'}
                                 placeholderTextColor="#666666"
                                 secureTextEntry={data.secureTextEntry ? true : false}
                                 style={[styles.textInput, {
@@ -239,15 +250,15 @@ const LoginScreen = ({navigation}) => {
 
 LoginScreen.navigationOptions=nav=>{
     return{
-        headerTitle:"Login"
+        headerTitle:'Login'
     }
 };
 
 const styles = StyleSheet.create({
     style1:{
-        flexDirection:"row",
+        flexDirection:'row',
         marginTop:10,
-        justifyContent:"space-between"
+        justifyContent:'space-between'
 
     },
     container: {
