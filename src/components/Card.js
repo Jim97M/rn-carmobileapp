@@ -40,9 +40,9 @@ export default function Card() {
     const clientSecret = await fetchPaymentIntentClientSecret();
 
     // 2. Gather customer billing information (ex. email)
-    const billingDetails = PaymentMethodCreateParams.BillingDetails = {
+    const billingDetails = (PaymentMethodCreateParams.BillingDetails = {
       name,
-    };
+    });
 
     const {error, paymentIntent} = await confirmPayment(clientSecret, {
       type: 'Card',
@@ -55,7 +55,7 @@ export default function Card() {
     } else if (paymentIntent) {
       Alert.alert(
         'Success',
-        `The payment was confirmed successfully! currency: ${paymentIntent.currency}`
+        `The payment was confirmed successfully! currency: ${paymentIntent.currency}`,
       );
       console.log('Success from promise', paymentIntent);
     }
@@ -74,17 +74,17 @@ export default function Card() {
         autoCapitalize="none"
         placeholder="Name"
         keyboardType="name-phone-pad"
-        onChange={(value) => setName(value.nativeEvent.text)}
+        onChange={value => setName(value.nativeEvent.text)}
         style={styles.input}
       />
       <CardField
         placeholder={{
           number: '4242 4242 4242 4242',
         }}
-        onCardChange={(cardDetails) => {
+        onCardChange={cardDetails => {
           console.log('cardDetails', cardDetails);
         }}
-        onFocus={(focusedField) => {
+        onFocus={focusedField => {
           console.log('focusField', focusedField);
         }}
         cardStyle={inputStyles}
@@ -122,11 +122,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const inputStyles = CardFieldInput.Styles = {
+const inputStyles = (CardFieldInput.Styles = {
   borderWidth: 1,
   backgroundColor: '#FFFFFF',
   borderColor: '#000000',
   borderRadius: 8,
   fontSize: 14,
   placeholderColor: '#999999',
-};
+});

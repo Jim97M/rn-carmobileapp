@@ -6,33 +6,34 @@ import React from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Cars from "../../tabs/cars";
-const HomeIcon = require('../../assets/flower.svg');
+import  Icon  from "react-native-vector-icons/Feather";
+import Setting from "../setting";
+const Tab = createBottomTabNavigator();
 const Home = () => {
 
-  // const [items, setItems] = useState([]);
-  //  const theme = useTheme();
 
-  //  const fetchData = () => {
-  //        axios.get('http://192.168.0.29:9999/car/getcar')
-  //        .then(async function(response) {
-  //         setItems(response.data);
-  //        })
-  //        .catch(function (error){
-  //          console.log(error);
-  //        })
-  //  }
-
-const {Navigator, Screen} = createBottomTabNavigator();
-
-  
   return (
-    <Navigator
+    <Tab.Navigator
+      initialRouteName="CarPage"
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarStyle: {elevation: 0, borderTopWidth: 0, backgroundColor: 'black'},
+        tabBarIcon: ({focused, iconColor, iconName}) => {
+          if(route.name === 'Cars'){
+            iconColor = focused ? '#3a86fe' : 'white'
+            iconName = 'home'
+          }else if (route.name === 'Settings'){
+            iconColor = focused ? '#3a86fe' : 'white'
+            iconName = 'user'
+          }
+          return <Icon name={iconName} size={25} color={iconColor} />
+        },
+        tabBarShowLabel: false,
+      })}
     >
-       <Screen 
-        name="Cars"
-        component={Cars}
-       />
-    </Navigator>
+      <Tab.Screen name="Cars" component={Cars} />
+      <Tab.Screen name="Settings" component={Setting} />
+    </Tab.Navigator>
   );
 };
 
