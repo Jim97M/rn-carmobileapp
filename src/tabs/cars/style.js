@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { StyleSheet } from 'react-native';
+import { Color } from '../../components/colors';
 
 const styles = StyleSheet.create({
     header: {
@@ -46,6 +47,24 @@ const styles = StyleSheet.create({
         marginTop: 30,
         paddingHorizontal: 16.5,
         paddingBottom: 100
+    },
+
+    cardStyle: {
+        margin: 10,
+        shadowColor: Color.overLay9,
+        shadowRadius: 10,
+        elevation: 5,
+        borderRadius: 10,
+        padding: 5
+    },
+
+    cardCover: {
+        backgroundColor: Color.white
+    },
+
+    locationStyle: {
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 });
 
