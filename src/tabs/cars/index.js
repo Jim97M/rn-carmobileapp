@@ -24,7 +24,7 @@ const Cars = () => {
 
     const fetchData = async () => {
     
-         const {data} = await axios.get('http://192.168.100.254:9999/car/getcar');
+         const {data} = await axios.get('http://192.168.100.181:9999/car/getcar');
          console.log(data);
          setCars(data);
        
@@ -32,7 +32,7 @@ const Cars = () => {
 
 
    const fetchImage = async () => {
-     await axios.get('http://192.168.100.254:9999/image/getimage')
+     await axios.get('http://192.168.100.181:9999/image/getimage')
     .then((res) => setImages(res.data))
     .catch((err) => console.log(err, "Error"));
    } 

@@ -63,7 +63,7 @@ const SignUpScreen = ({navigation}) => {
 
     const registerUser=()=>{
       const{email,password,confirmPassword}=data;
-        Axios.post("http://192.168.0.29:9999/user/register",{
+        Axios.post("http://192.168.100.181:9999/user/register",{
             email,
             password,
             confirmPassword
