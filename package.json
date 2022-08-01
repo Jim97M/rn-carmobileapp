@@ -45,6 +45,7 @@
     "react-native-common-date-picker": "^2.3.4",
     "react-native-config": "^1.4.5",
     "react-native-daterange": "^2.3.17",
+    "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "^2.4.0",
     "react-native-image-picker": "^4.7.3",
     "react-native-material-dropdown": "^0.11.1",

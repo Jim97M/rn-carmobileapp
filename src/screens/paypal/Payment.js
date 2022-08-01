@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable quotes */
 /* eslint-disable keyword-spacing */
 /* eslint-disable eqeqeq */
@@ -46,14 +47,14 @@ export default function Payment(props) {
          source={{uri: 'http://192.168.100.254:9999/pay/pay/' + route.params.amt}}
         />
     )
-
+}
     const Loading = () => {
         return(
             <View style={{height: height, width: width, justifyContent: 'center', alignItems: 'center'}}>
                <Image
+               source={require('../../assets/paypal.png')}
                   style={{width: 250, height: 100, resizeMode: 'contain'}}
                />
             </View>
         )
     }
-}
