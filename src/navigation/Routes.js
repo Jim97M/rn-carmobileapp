@@ -10,6 +10,7 @@ import SignUpScreen from "../screens/register/SignUpScreen";
 import Home from "../screens/home";
 import Cars from "../tabs/cars";
 import Setting from "../screens/setting";
+import AddCar from "../screens/cars/AddCar";
 const Stack = createNativeStackNavigator();
 
 const Router = () => {
@@ -22,6 +23,7 @@ const Router = () => {
          <Stack.Screen name="Home" component={Home} />
          <Stack.Screen name="Cars" component={Cars} />
          <Stack.Screen name="Setting" component={Setting} />
+         <Stack.Screen name="AddCar" component={AddCar} />
       </Stack.Navigator>
     );
 };

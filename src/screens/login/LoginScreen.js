@@ -85,7 +85,7 @@ const LoginScreen = ({navigation}) => {
 
     const login = ()=>{
         const{ email, password }=data;
-       Axios.post('http://192.168.100.181:9999/user/login',{
+       Axios.post('http://192.168.100.254:9999/user/login',{
             email,
             password,
         }).then(async function (res){

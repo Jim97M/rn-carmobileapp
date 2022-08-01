@@ -20,13 +20,13 @@ import Icon from 'react-native-vector-icons/AntDesign';
 // import {Buffer} from 'buffer';
 
 
-const Cars = () => {
+const Cars = ({navigation}) => {
     const [cars, setCars] = useState([]);
     const [images, setImages] = useState([]);
 
     const fetchData = async () => {
 
-         const {data} = await axios.get('http://192.168.100.181:9999/car/getcar');
+         const {data} = await axios.get('http://192.168.100.254:9999/car/getcar');
          console.log(data);
          setCars(data);
 
@@ -34,7 +34,7 @@ const Cars = () => {
 
 
    const fetchImage = async (base64EncodedImage) => {
-     await axios.get('http://192.168.100.181:9999/image/getimage')
+     await axios.get('http://192.168.100.254:9999/image/getimage')
     .then((res) => setImages(res.data))
     .catch((err) => console.log(err, "Error"));
    }
@@ -74,15 +74,19 @@ const Cars = () => {
                      ) : (
                       <Progress.CircleSnail color={'blue'} />
                      )} */}
-                     <FAB 
+                     
+                </View>
+                <FAB 
                       title="ADD"
                       placement='right'
                       size='small'
                       upperCase={true}
                       icon={<Icon name='pluscircle' size={24} color="white"/>}
                       buttonStyle={{backgroundColor: "green"}}
-                     />
-                </View>
+                      onPress={() => 
+                        navigation.navigate('AddCar')
+                      }
+                  />
 
     </View>
 

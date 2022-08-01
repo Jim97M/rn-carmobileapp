@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-vars */
 import React from 'react';
@@ -90,8 +91,9 @@ const AddCar = () => {
                   maxHeight: 200,
                   maxWidth: 200,
                 });
-              }}
-            />
+              }}>
+              <Text>Select File</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -120,10 +122,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 
-  body: {
-    borderTopStartRadius: '10%',
-    borderTopEndRadius: '10%',
-  },
+  // body: {
+  //   borderTopStartRadius: '10%',
+  //   borderTopEndRadius: '10%',
+  // },
   textInput: {
     marginTop: -5,
     paddingLeft: 10,
@@ -143,5 +145,23 @@ const styles = StyleSheet.create({
   text_footer: {
     color: '#05375a',
     fontSize: 18,
+  },
+  buttonStyle: {
+    backgroundColor: '#307ecc',
+    borderWidth: 0,
+    color: '#FFFFFF',
+    borderColor: '#307ecc',
+    height: 40,
+    alignItems: 'center',
+    borderRadius: 30,
+    marginLeft: 35,
+    marginRight: 35,
+    marginTop: 15,
+  },
+
+  buttonTextStyle: {
+    color: '#FFFFFF',
+    paddingVertical: 10,
+    fontSize: 16,
   },
 });
