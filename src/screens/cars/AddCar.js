@@ -39,7 +39,7 @@ const AddCar = () => {
       formData.append('price', data.price);
       formData.append('location', data.location);
       formData.append('image', data.image);
-      const res = await fetch(`http://192.168.100.254:9999/`, {
+      const res = await fetch(`http://192.168.100.254:9999/car/carpost`, {
         method: 'POST',
         body: formData,
       });
@@ -66,7 +66,7 @@ const AddCar = () => {
                 placeholderTextColor="#666666"
                 style={styles.textInput}
                 value={data.name}
-                onChange
+                onChange={handleChange('name')}
                 autoCapitalize="none"
               />
             </View>
@@ -81,6 +81,8 @@ const AddCar = () => {
                 placeholder={'Car Model'}
                 placeholderTextColor="#666666"
                 style={styles.textInput}
+                onChange={handleChange('model')}
+                value={data.model}
                 autoCapitalize="none"
               />
             </View>
@@ -94,6 +96,8 @@ const AddCar = () => {
               <TextInput
                 placeholder={'Book Price'}
                 placeholderTextColor="#666666"
+                value={data.price}
+                onChange={handleChange('price')}
                 style={styles.textInput}
                 autoCapitalize="none"
               />
@@ -108,7 +112,9 @@ const AddCar = () => {
               <TextInput
                 placeholder={'Location'}
                 placeholderTextColor="#666666"
+                value={data.location}
                 style={styles.textInput}
+                onChange={handleChange('location')}
                 autoCapitalize="none"
               />
             </View>
@@ -124,10 +130,20 @@ const AddCar = () => {
                   maxHeight: 200,
                   maxWidth: 200,
                 });
-              }}>
+              }}
+              onChange={handleChange('image')}>
               <Text>Select File</Text>
             </TouchableOpacity>
           </View>
+        </View>
+        <View style={styles.action}>
+          <TouchableOpacity
+            style={styles.submit}
+            onPress={() => {
+              handleSubmit();
+            }}>
+            <Text style={styles.buttonTextStyle}>ADD CAR</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -196,5 +212,13 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     paddingVertical: 10,
     fontSize: 16,
+  },
+
+  submit: {
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 45,
+    width: width * 0.8,
   },
 });
