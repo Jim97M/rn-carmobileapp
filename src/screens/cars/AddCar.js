@@ -1,7 +1,7 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -19,6 +19,37 @@ const height = Dimensions.get('screen').height;
 const width = Dimensions.get('screen').width;
 
 const AddCar = () => {
+  const [data, setData] = useState({
+    name: '',
+    model: '',
+    price: '',
+    location: '',
+    image: '',
+  });
+
+  const handleChange = name => e => {
+    const value = name === 'image' ? e.target.files[0] : e.target.value;
+    setData({...data, [name]: value});
+  };
+  const handleSubmit = async () => {
+    try {
+      let formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('model', data.model);
+      formData.append('price', data.price);
+      formData.append('location', data.location);
+      formData.append('image', data.image);
+      const res = await fetch(`http://192.168.100.254:9999/`, {
+        method: 'POST',
+        body: formData,
+      });
+      if (res.ok) {
+        setData({name: '', model: '', price: '', location: '', image: ''});
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -34,6 +65,8 @@ const AddCar = () => {
                 placeholder={'Car Name'}
                 placeholderTextColor="#666666"
                 style={styles.textInput}
+                value={data.name}
+                onChange
                 autoCapitalize="none"
               />
             </View>
@@ -111,7 +144,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    height: height * 0.2,
+    height: height * 0.1,
     backgroundColor: 'lightgray',
     justifyContent: 'center',
     alignItems: 'center',
@@ -119,7 +152,7 @@ const styles = StyleSheet.create({
 
   headerText: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 15,
   },
 
   // body: {
