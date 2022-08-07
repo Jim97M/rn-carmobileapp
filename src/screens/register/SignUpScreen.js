@@ -5,7 +5,6 @@ import {
     Text,
     TouchableOpacity,
     TextInput,
-    Platform,
     StyleSheet ,
     StatusBar,
     Alert
@@ -14,22 +13,22 @@ import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from 'react-native-paper';
-import Axios from "axios";
+import Axios from 'axios';
 
 
 const SignUpScreen = ({navigation}) => {
 
     const [data,setData]=useState({
-        email:"",
-        password:"",
-        confirmPassword:"",
+        email:'',
+        password:'',
+        confirmPassword:'',
         checkTextInputChange:false,
         secureTextEntry: true,
         confirm_secureTextEntry: true,
     });
     const [res,setRes]=useState({
-        err:"",
-        res:""
+        err:'',
+        res:''
     });
 
 
@@ -43,7 +42,6 @@ const SignUpScreen = ({navigation}) => {
         } else {
             setData({
                 ...data,
-                email: val,
                 checkTextInputChange: false
             });
         }
@@ -63,7 +61,7 @@ const SignUpScreen = ({navigation}) => {
 
     const registerUser=()=>{
       const{email,password,confirmPassword}=data;
-        Axios.post("http://192.168.100.254:9999/user/register",{
+        Axios.post('http://192.168.0.29:9999/user/register',{
             email,
             password,
             confirmPassword
@@ -76,8 +74,8 @@ const SignUpScreen = ({navigation}) => {
             }
 
         }).then(res1=>{
-                Alert.alert(`${res.err}`,"Check",[
-                    {text:"Ok"}
+                Alert.alert(`${res.err}`,'Check',[
+                    {text:'Success'}
                 ])
 
         })
@@ -114,14 +112,14 @@ const SignUpScreen = ({navigation}) => {
                         color: colors.text
                     }]}>Email</Text>
                     <View style={styles.style1}>
-                        <View style={{flexDirection:"row"}}>
+                        <View style={{flexDirection:'row'}}>
                             <FontAwesome
                                 name="user-o"
                                 color={colors.text}
                                 size={20}
                             />
                             <TextInput
-                                placeholder={"Your Email"}
+                                placeholder={'Your Email'}
                                 placeholderTextColor="#666666"
                                 style={[styles.textInput, {
                                     color: colors.text
@@ -150,14 +148,14 @@ const SignUpScreen = ({navigation}) => {
                         color: colors.text
                     }]}>Password</Text>
                     <View style={styles.style1}>
-                        <View style={{flexDirection:"row"}}>
+                        <View style={{flexDirection:'row'}}>
                             <Feather
                                 name="lock"
                                 color={colors.text}
                                 size={20}
                             />
                             <TextInput
-                                placeholder={"Your Password"}
+                                placeholder={'Your Password'}
                                 placeholderTextColor="#666666"
                                 secureTextEntry={data.secureTextEntry ? true:false}
                                 style={styles.textInput}
@@ -191,15 +189,15 @@ const SignUpScreen = ({navigation}) => {
                         color: colors.text
                     }]}>Confirm Password</Text>
                     <View style={styles.style1}>
-                        <View style={{flexDirection:"row"}}>
+                        <View style={{flexDirection:'row'}}>
                             <Feather
                                 name="lock"
                                 color={colors.text}
                                 size={20}
                             />
                             <TextInput
-                                type={"password"}
-                                placeholder={"Your Password"}
+                                type={'password'}
+                                placeholder={'Your Password'}
                                 placeholderTextColor="#666666"
                                 secureTextEntry={data.confirm_secureTextEntry ? true:false}
                                 style={[styles.textInput, {
@@ -234,9 +232,9 @@ const SignUpScreen = ({navigation}) => {
                     <Text style={styles.color_textPrivate}>
                         By signing up you agree to our
                     </Text>
-                    <Text style={[styles.color_textPrivate, {fontWeight: 'bold'}]}>{" "}Terms of service</Text>
-                    <Text style={styles.color_textPrivate}>{" "}and</Text>
-                    <Text style={[styles.color_textPrivate, {fontWeight: 'bold'}]}>{" "}Privacy policy</Text>
+                    <Text style={[styles.color_textPrivate, {fontWeight: 'bold'}]}>{' '}Terms of service</Text>
+                    <Text style={styles.color_textPrivate}>{' '}and</Text>
+                    <Text style={[styles.color_textPrivate, {fontWeight: 'bold'}]}>{' '}Privacy policy</Text>
                 </View>
                 <View style={styles.button}>
 
@@ -275,15 +273,15 @@ const SignUpScreen = ({navigation}) => {
 
 SignUpScreen.navigationOptions=nav=>{
     return{
-        headerTitle:"Register"
+        headerTitle:'Register'
     }
 };
 
 const styles = StyleSheet.create({
     style1:{
-        flexDirection:"row",
+        flexDirection:'row',
         marginTop:10,
-        justifyContent:"space-between"
+        justifyContent:'space-between'
     },
     container: {
         flex: 1,

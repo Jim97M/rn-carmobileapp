@@ -3,6 +3,11 @@ import { StyleSheet } from 'react-native';
 import { Color } from '../../components/colors';
 
 const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: 'white',
+      padding: 10
+    },
     header: {
         marginTop: 19,
         paddingHorizontal: 30,
@@ -65,6 +70,21 @@ const styles = StyleSheet.create({
     locationStyle: {
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    touchableOpacityStyle: {
+    //  position: 'absolute',
+     width: 50,
+     height: 50,
+     alignItems: 'center',
+     justifyContent: 'center',
+     right: 0,
+     bottom: -20,   
+    },
+
+    floatingActionButton: {
+        resizeMode: 'contain',
+        height: 50,
+        width: 50
     }
 });
 

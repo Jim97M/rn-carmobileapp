@@ -14,7 +14,7 @@ import AddCar from "../screens/cars/AddCar";
 const Stack = createNativeStackNavigator();
 
 const Router = () => {
-    return(
+    return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
          <Stack.Screen name="OnBoard" component={OnBoard} />
 

@@ -9,12 +9,12 @@
 
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {View, Text, StyleSheet } from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import styles from './style';
 import { Color } from '../../components/colors';
 import * as Progress from 'react-native-progress';
 import { Card, Paragraph, Title } from 'react-native-paper';
-import { FAB } from 'react-native-elements';
+// import { FAB } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
 // import btoa from 'btoa';
 // import {Buffer} from 'buffer';
@@ -47,11 +47,11 @@ const Cars = ({navigation}) => {
 
 
     return(
-       <View>
+       <View style={styles.container}>
                <View style={styles.header}>
                  <Text style={styles.headerText}>Cars</Text>
                 </View>
-                <View style={styles.body}>
+                
                    {/* {cars.length > 0 ? (
                             <Card >
                               {images.map((img) => {
@@ -74,9 +74,10 @@ const Cars = ({navigation}) => {
                      ) : (
                       <Progress.CircleSnail color={'blue'} />
                      )} */}
-                     
-                </View>
-                <FAB 
+
+              
+             
+                {/* <FAB 
                       title="ADD"
                       placement='right'
                       size='small'
@@ -86,12 +87,27 @@ const Cars = ({navigation}) => {
                       onPress={() => 
                         navigation.navigate('AddCar')
                       }
-                  />
+                  /> */}
+                  <TouchableOpacity
+                     activeOpacity={0.7}
+                     style={styles.touchableOpacityStyle}
+                     onPress={() => {
+                      navigation.navigate('AddCar');
+                     }}
+                  >
+                      <Image 
+                        source={require('../../assets/floating.png')}
+                        style={styles.floatingActionButton}
+                      />
+                  </TouchableOpacity>
 
     </View>
 
     );
 };
 
+
 export default Cars;
+
+
 
