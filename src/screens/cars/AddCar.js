@@ -1,317 +1,397 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable keyword-spacing */
-/* eslint-disable no-undef */
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable no-unused-vars */
 import React, {useState} from 'react';
 import {
   View,
   Text,
+  TouchableOpacity,
   TextInput,
   StyleSheet,
-  Dimensions,
-  TouchableOpacity,
+  StatusBar,
   Alert,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
+import {useTheme} from 'react-native-paper';
+import Axios from 'axios';
 
-const height = Dimensions.get('screen').height;
+const AddCar = ({navigation}) => {
+  const [data, setData] = useState({
+    first_name: '',
+    other_names: '',
+    house_name: '',
+    location: '',
+    national_id: '',
+    description: '',
+  });
+  const [res, setRes] = useState({
+    err: '',
+    res: '',
+  });
 
-const AddCar = () => {
-  // const [data, setData] = useState({
-  //   name: '',
-  //   model: '',
-  //   price: '',
-  //   location: '',
-  //   description: '',
-  //   checkTextInputChange: false,
-  // });
+  const firstNameChange = val => {
+    setData({
+      ...data,
+      first_name: val,
+    });
+  };
 
-  // const [res, setRes] = useState({
-  //   err: '',
-  //   res: '',
-  // });
+  const otherNamesChange = val => {
+    setData({
+      ...data,
+      other_names: val,
+    });
+  };
 
-  // const nameChange = (val) => {
-  //   if (val.length !== 0) {
-  //     setData({
-  //       ...data,
-  //       name: val,
-  //       checkTextInputChange: true,
-  //     });
-  //   } else {
-  //     setData({
-  //       ...data,
-  //       checkTextInputChange: false,
-  //     });
-  //   }
-  // };
+  const houseNameChange = val => {
+    setData({
+      ...data,
+      house_name: val,
+    });
+  };
 
-  // const modelChange = (val) => {
-  //   if (val.length !== 0) {
-  //     setData({
-  //       ...data,
-  //       model: val,
-  //       checkTextInputChange: true,
-  //     });
-  //   } else {
-  //     setData({
-  //       ...data,
-  //       checkTextInputChange: false,
-  //     });
-  //   }
-  // };
-
-  // const priceChange = (val) => {
-  //   if (val.length !== 0) {
-  //     setData({
-  //       ...data,
-  //       price: val,
-  //       checkTextInputChange: true,
-  //     });
-  //   } else {
-  //     setData({
-  //       ...data,
-  //       checkTextInputChange: false,
-  //     });
-  //   }
-  // };
-
-  // const locationChange = (val) => {
-  //   if (val.length !== 0) {
-  //     setData({
-  //       ...data,
-  //       location: val,
-  //       checkTextInputChange: true,
-  //     });
-  //   } else {
-  //     setData({
-  //       ...data,
-  //       checkTextInputChange: false,
-  //     });
-  //   }
-  // };
-
-  // const descriptionChange = (val) => {
-  //   if (val.length !== 0) {
-  //     setData({
-  //       ...data,
-  //       description: val,
-  //       checkTextInputChange: true,
-  //     });
-  //   } else {
-  //     setData({
-  //       ...data,
-  //       checkTextInputChange: false,
-  //     });
-  //   }
-  // };
-
-  // const handleSubmit = () => {
-  //   const {name, model, price, location, description} = data;
-  //   Axios.post('http://192.168.0.29:9999/car/carpost', {
-  //     name: name,
-  //     model: model,
-  //     price: price,
-  //     location: location,
-  //     description: description,
-  //   }).then(res => {
-  //     Alert.alert(`${res.err}`, 'Failed', [{text: 'Success'}]).catch(err =>
-  //       console.log(err.response),
-  //     );
+  // const nationalIdChange = val => {
+  //   setData({
+  //     ...data,
+  //     national_id: val,
   //   });
   // };
 
+  const locationChange = val => {
+    setData({
+      ...data,
+      location: val,
+    });
+  };
+
+  const descriptionChange = val => {
+    setData({
+      ...data,
+      description: val,
+    });
+  };
+
+  const registerHouse = () => {
+    const {first_name, other_names, house_name, location, description} = data;
+    Axios.post('http://192.168.100.254:8082/api/landlord/createhouse', {
+      first_name,
+      other_names,
+      house_name,
+      location,
+      description,
+    }).then(res => {
+      //console.log(res.data.access_token)
+      if (res.data) {
+        navigation.navigate('UploadImage');
+      }
+    });
+    // .then(res1 => {
+    //   Alert.alert(`${res.err}`, 'Check', [{text: 'Success'}]);
+    //   Alert.alert = 'Success' ? navigation.navigate('UploadImage') : null;
+    // })
+    // .catch(err => console.log(err.response));
+  };
+
+  const {colors} = useTheme();
   return (
     <View style={styles.container}>
-      {/* <View style={styles.header}>
-        <Text style={styles.headerText}>ADD CAR</Text>
+      <StatusBar backgroundColor="#009387" barStyle="light-content" />
+      <View style={styles.header}>
+        <Text style={styles.text_header}>LandLord Info</Text>
       </View>
-      <View style={styles.footer}>
+      <Animatable.View animation="fadeInLeft" style={styles.footer}>
         <View style={styles.action}>
-          <Text style={styles.text_footer}>Car Name</Text>
+          <Text
+            style={[
+              styles.text_footer,
+              {
+                color: colors.text,
+              },
+            ]}>
+            Fisrtname
+          </Text>
           <View style={styles.style1}>
             <View style={{flexDirection: 'row'}}>
-              
+              <FontAwesome name="user-o" color={colors.text} size={20} />
               <TextInput
-                placeholder={'Car Name'}
+                placeholder={'Firstname'}
                 placeholderTextColor="#666666"
+                style={[
+                  styles.textInput,
+                  {
+                    color: colors.text,
+                  },
+                ]}
+                autoCapitalize="none"
+                onChangeText={val => firstNameChange(val)}
+              />
+            </View>
+
+            {data.checkTextInputChange ? (
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="green" size={20} />
+              </Animatable.View>
+            ) : null}
+          </View>
+        </View>
+        <View style={styles.action}>
+          <Text
+            style={[
+              styles.text_footer,
+              {
+                color: colors.text,
+              },
+            ]}>
+            Othernames
+          </Text>
+          <View style={styles.style1}>
+            <View style={{flexDirection: 'row'}}>
+              <FontAwesome name="user-o" color={colors.text} size={20} />
+              <TextInput
+                placeholder={'Othername'}
+                placeholderTextColor="#666666"
+                style={[
+                  styles.textInput,
+                  {
+                    color: colors.text,
+                  },
+                ]}
+                autoCapitalize="none"
+                onChangeText={val => otherNamesChange(val)}
+              />
+            </View>
+
+            {data.checkTextInputChange ? (
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="green" size={20} />
+              </Animatable.View>
+            ) : null}
+          </View>
+        </View>
+        <View style={styles.action}>
+          <Text
+            style={[
+              styles.text_footer,
+              {
+                color: colors.text,
+              },
+            ]}>
+            Housename
+          </Text>
+          <View style={styles.style1}>
+            <View style={{flexDirection: 'row'}}>
+              <FontAwesome name="user-o" color={colors.text} size={20} />
+              <TextInput
+                placeholder={'Housename'}
+                placeholderTextColor="#666666"
+                style={[
+                  styles.textInput,
+                  {
+                    color: colors.text,
+                  },
+                ]}
+                autoCapitalize="none"
+                onChangeText={val => houseNameChange(val)}
+              />
+            </View>
+
+            {data.checkTextInputChange ? (
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="green" size={20} />
+              </Animatable.View>
+            ) : null}
+          </View>
+        </View>
+        {/* <View style={styles.action}> */}
+        {/* <Text
+            style={[
+              styles.text_footer,
+              {
+                color: colors.text,
+              },
+            ]}>
+            National Id
+          </Text>
+          <View style={styles.style1}>
+            <View style={{flexDirection: 'row'}}>
+              <FontAwesome name="user-o" color={colors.text} size={20} />
+              <TextInput
+                placeholder={'National Id'}
+                placeholderTextColor="#666666"
+                style={[
+                  styles.textInput,
+                  {
+                    color: colors.text,
+                  },
+                ]}
+                onChangeText={val => nationalIdChange(val)}
+              />
+            </View>
+            {data.checkTextInputChange ? (
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="green" size={20} />
+              </Animatable.View>
+            ) : null}
+          </View>
+        </View> */}
+        <View style={styles.action}>
+          <Text
+            style={[
+              styles.text_footer,
+              {
+                color: colors.text,
+              },
+            ]}>
+            Location
+          </Text>
+          <View style={styles.style1}>
+            <View style={{flexDirection: 'row'}}>
+              <Feather name="lock" color={colors.text} size={20} />
+              <TextInput
+                placeholder={'Location'}
+                placeholderTextColor="#666666"
+                secureTextEntry={data.secureTextEntry ? true : false}
                 style={styles.textInput}
-                // onChange={val => nameChange(val)}
+                onChangeText={val => locationChange(val)}
                 autoCapitalize="none"
               />
             </View>
           </View>
-
-          <View style={styles.action}>
-            <Text style={styles.text_footer}>Car Model</Text>
-            <View style={styles.style1}>
-              <View style={{flexDirection: 'row'}}>
-                <TextInput
-                  placeholder={'Car Model'}
-                  placeholderTextColor="#666666"
-                  style={styles.textInput}
-                  // onChange={val => modelChange(val)}
-                  autoCapitalize="none"
-                />
-              </View>
-            </View>
-          </View>
-          <View style={styles.action}>
-            <Text style={styles.text_footer}>Price</Text>
-            <View style={styles.style1}>
-              <View style={{flexDirection: 'row'}}>
-                <TextInput
-                  placeholder={'Book Price'}
-                  placeholderTextColor="#666666"
-                  // onChange={val => priceChange(val)}
-                  style={styles.textInput}
-                  autoCapitalize="none"
-                />
-              </View>
-            </View>
-          </View>
-          <View style={styles.action}>
-            <Text style={styles.text_footer}>Location</Text>
-            <View style={styles.style1}>
-              <View style={{flexDirection: 'row'}}>
-                <TextInput
-                  placeholder={'Location'}
-                  placeholderTextColor="#666666"
-                  style={styles.textInput}
-                  // onChange={val => locationChange(val)}
-                  autoCapitalize="none"
-                />
-              </View>
-            </View>
-          </View>
-          <View style={styles.action}>
-            <Text style={styles.text_footer}>Description</Text>
-            <View style={styles.style1}>
-              <View style={{flexDirection: 'row'}}>
-                <TextInput
-                  placeholder={'Description'}
-                  placeholderTextColor="#666666"
-                  style={styles.textInput}
-                  // onChange={val => descriptionChange(val)}
-                  autoCapitalize="none"
-                />
-              </View>
-            </View>
-          </View> */}
-          {/* <View style={styles.action}>
+        </View>
+        <View style={styles.action}>
+          <Text
+            style={[
+              styles.text_footer,
+              {
+                color: colors.text,
+              },
+            ]}>
+            Description
+          </Text>
           <View style={styles.style1}>
-            <TouchableOpacity
-              onPress={() => {
-                ImagePicker.launchImageLibrary({
-                  mediaType: 'photo',
-                  includeBase64: false,
-                  maxHeight: 200,
-                  maxWidth: 200,
-                });
-              }}
-              onChange={handleChange('image')}>
-              <Text>Select File</Text>
-            </TouchableOpacity>
+            <View style={{flexDirection: 'row'}}>
+              <Feather name="lock" color={colors.text} size={20} />
+              <TextInput
+                type={'text'}
+                placeholder={'Description'}
+                placeholderTextColor="#666666"
+                style={[
+                  styles.textInput,
+                  {
+                    color: colors.text,
+                  },
+                ]}
+                onChangeText={val => descriptionChange(val)}
+                autoCapitalize="none"
+              />
+            </View>
           </View>
-        </View> */}
-          {/* <View style={styles.button}>
-            <TouchableOpacity
+        </View>
+        <View style={styles.button}>
+          <TouchableOpacity
+            onPress={() => {
+              registerHouse();
+            }}
+            style={[
+              styles.signIn,
+              {
+                borderColor: '#009387',
+                borderWidth: 1,
+                marginTop: 10,
+              },
+            ]}>
+            <Text
               style={[
-                styles.signIn,
+                styles.textSign,
                 {
-                  borderColor: '#009387',
-                  borderWidth: 1,
-                  marginTop: 5,
+                  color: '#009387',
                 },
-              ]} */}
-              
-              {/* onPress={() => { */}
-                  {/* handleSubmit();
-               }}
-               >
-              <Text */}
-      {/* //           style={[ */}
-      {/* //             styles.textSign,
-      //             { */}
-      {/* //               color: '#009387',
-      //             },
-      //           ]}>
-      //           ADD CAR
-      //         </Text> */}
-      {/* //       </TouchableOpacity> */}
-      {/* //     </View> */}
-      {/* //   </View> */}
-      {/* // </View> */}
-      <Text>Text</Text>
-    </View> 
+              ]}>
+              Post House
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </Animatable.View>
+    </View>
   );
 };
 
+const styles = StyleSheet.create({
+  style1: {
+    flexDirection: 'row',
+    marginTop: 10,
+    justifyContent: 'space-between',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#009387',
+  },
+  header: {
+    flex: 0.4,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
+    paddingBottom: 30,
+  },
+  footer: {
+    flex: 5,
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  text_header: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 25,
+  },
+  text_footer: {
+    color: '#05375a',
+    fontSize: 18,
+  },
+  textPrivate: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 5,
+  },
+  color_textPrivate: {
+    color: 'grey',
+  },
+  action: {
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f2f2f2',
+    paddingBottom: 5,
+  },
+  actionError: {
+    flexDirection: 'row',
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#FF0000',
+    paddingBottom: 5,
+  },
+  textInput: {
+    marginTop: -5,
+    paddingLeft: 10,
+    color: '#05375a',
+  },
+  errorMsg: {
+    color: '#FF0000',
+    fontSize: 14,
+  },
+  button: {
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  signIn: {
+    width: '100%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  textSign: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
 export default AddCar;
-
-// const styles = StyleSheet.create({
-  // style1: {
-  //   flexDirection: 'row',
-  //   marginTop: 10,
-  //   justifyContent: 'space-between',
-  // },
-  // container: {
-  //   flex: 1,
-  //   alignContent: '#009387',
-  // },
-  // action: {
-  //   marginTop: 10,
-  //   borderBottomWidth: 1,
-  //   borderBottomColor: '#f2f2f2',
-  //   paddingBottom: 5,
-  // },
-  // actionError: {
-  //   flexDirection: 'row',
-  //   marginTop: 10,
-  //   borderBottomWidth: 1,
-  //   borderBottomColor: '#FF0000',
-  //   paddingBottom: 5,
-  // },
-  // header: {
-  //   height: height * 0.1,
-  //   justifyContent: 'center',
-  //   paddingBottom: 50,
-  // },
-  // signIn: {
-  //   width: '100%',
-  //   height: 50,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   borderRadius: 10,
-  // },
-  // footer: {
-  //   flex: 5,
-  //   backgroundColor: '#fff',
-  //   borderTopLeftRadius: 30,
-  //   borderTopRightRadius: 30,
-  //   paddingHorizontal: 20,
-  //   paddingVertical: 30,
-  // },
-  // headerText: {
-  //   fontWeight: 'bold',
-  //   fontSize: 15,
-  // },
-  // errorMsg: {
-  //   color: '#FF0000',
-  //   fontSize: 14,
-  // },
-  // textInput: {
-  //   marginTop: -5,
-  //   paddingLeft: 10,
-  //   color: '#05375a',
-  // },
-  // button: {
-  //   alignItems: 'center',
-  //   marginTop: 10,
-  // },
-  // textSign: {
-  //   fontSize: 18,
-  //   fontWeight: 'bold',
-  // },
-// });
