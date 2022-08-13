@@ -1,2 +1,2 @@
-export const name = "hamza";
-export const statusBarColor = "#56CCF2";
+export const name = 'hamza';
+export const statusBarColor = '#56CCF2';

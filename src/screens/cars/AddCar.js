@@ -16,11 +16,10 @@ import Axios from 'axios';
 
 const AddCar = ({navigation}) => {
   const [data, setData] = useState({
-    first_name: '',
-    other_names: '',
-    house_name: '',
+    name: '',
+    model: '',
+    price: '',
     location: '',
-    national_id: '',
     description: '',
   });
   const [res, setRes] = useState({
@@ -28,24 +27,24 @@ const AddCar = ({navigation}) => {
     res: '',
   });
 
-  const firstNameChange = val => {
+  const nameChange = val => {
     setData({
       ...data,
-      first_name: val,
+      name: val,
     });
   };
 
-  const otherNamesChange = val => {
+  const modelChange = val => {
     setData({
       ...data,
-      other_names: val,
+      model: val,
     });
   };
 
-  const houseNameChange = val => {
+  const priceChange = val => {
     setData({
       ...data,
-      house_name: val,
+      price: val,
     });
   };
 
@@ -71,17 +70,17 @@ const AddCar = ({navigation}) => {
   };
 
   const registerHouse = () => {
-    const {first_name, other_names, house_name, location, description} = data;
-    Axios.post('http://192.168.100.254:8082/api/landlord/createhouse', {
-      first_name,
-      other_names,
-      house_name,
+    const {name, model, price, location, description} = data;
+    Axios.post('http://192.168.100.254:9999/car/carpost', {
+      name,
+      model,
+      price,
       location,
       description,
     }).then(res => {
       //console.log(res.data.access_token)
       if (res.data) {
-        navigation.navigate('UploadImage');
+        navigation.navigate('PostImage');
       }
     });
     // .then(res1 => {
@@ -122,7 +121,7 @@ const AddCar = ({navigation}) => {
                   },
                 ]}
                 autoCapitalize="none"
-                onChangeText={val => firstNameChange(val)}
+                onChangeText={val => nameChange(val)}
               />
             </View>
 
@@ -156,7 +155,7 @@ const AddCar = ({navigation}) => {
                   },
                 ]}
                 autoCapitalize="none"
-                onChangeText={val => otherNamesChange(val)}
+                onChangeText={val => modelChange(val)}
               />
             </View>
 
@@ -190,7 +189,7 @@ const AddCar = ({navigation}) => {
                   },
                 ]}
                 autoCapitalize="none"
-                onChangeText={val => houseNameChange(val)}
+                onChangeText={val => priceChange(val)}
               />
             </View>
 

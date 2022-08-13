@@ -265,13 +265,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#009387'
     },
     header: {
-        flex: 1,
+        flex: 0.6,
         justifyContent: 'flex-end',
         paddingHorizontal: 20,
         paddingBottom: 50
     },
     footer: {
-        flex: 3,
+        flex: 2.6,
         backgroundColor: '#fff',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
